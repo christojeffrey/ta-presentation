@@ -6,12 +6,11 @@
 </script>
 
 <!-- together presentation -->
-<Slide>
+<Slide animate>
 	<div class="text-6xl font-bold">title?</div>
 </Slide>
 
 <GraphPresentation />
-
 
 <!-- 
 <Slide>
