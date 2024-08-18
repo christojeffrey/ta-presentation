@@ -31,7 +31,7 @@
 </script>
 
 <div class="reveal">
-	<div class="slides">
+	<div class="slides text-3xl">
 		<Presentation />
 	</div>
 </div>
