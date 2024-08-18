@@ -1,5 +1,6 @@
 <script lang="ts">
-	import Slide from './slide.svelte'
+	import Graph from '../../graph/routes/graph.svelte';
+	import Slide from './slide.svelte';
 </script>
 
 <Slide>Horizontal Slide</Slide>
@@ -10,6 +11,7 @@
 </Slide>
 
 <Slide animate>
+	<Graph />
 	<ul>
 		<li>React</li>
 		<li>Solid</li>

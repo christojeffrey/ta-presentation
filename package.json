@@ -32,7 +32,9 @@
 	"dependencies": {
 		"@fontsource/jetbrains-mono": "^5.0.21",
 		"@fontsource/manrope": "^5.0.21",
+		"@types/d3": "^7.4.3",
 		"@types/reveal.js": "^5.0.3",
+		"d3": "^7.9.0",
 		"reveal.js": "^5.1.0"
 	}
 }
