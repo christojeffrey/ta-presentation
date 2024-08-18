@@ -7,19 +7,23 @@
 	import Notes from 'reveal.js/plugin/notes/notes';
 
 	import 'reveal.js/dist/reveal.css';
-	import 'reveal.js/dist/theme/black.css';
+	// import 'reveal.js/dist/theme/black.css';
 	import 'reveal.js/plugin/highlight/monokai.css';
 
-	import Presentation from './presentation.svelte';
+	import Presentation from '../../presentation.svelte';
 
 	onMount(() => {
 		const deck = new Reveal({
 			plugins: [Markdown, Highlight, Notes],
 			autoAnimateEasing: 'ease',
 			autoAnimateDuration: 1,
-			hash: true
+			hash: true,
+
 			// controls: false,
 			// progress: false
+
+			disableLayout: true, // handle layout manually
+			margin: 0
 		});
 
 		deck.initialize();

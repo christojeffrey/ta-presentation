@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 
-	import { debuggingConsole, extractAvailableEdgeType } from '../helper';
+	import { debuggingConsole, extractAvailableEdgeType } from './tooling/helper';
 	import type {
 		ConfigInterface,
 		ConvertedData,
@@ -10,17 +10,17 @@
 		GraphDataNode,
 		GraphData,
 		RawInputType
-	} from '../types';
+	} from './tooling/types';
 
 	// scripts
-	import { cleanCanvas, draw, filter, converter, createGraphData } from '../scripts';
+	import { cleanCanvas, draw, filter, converter, createGraphData } from './tooling/scripts';
 
 	// components
-	import RawDataInputer from './components/raw-data-inputer.svelte';
-	import ConfigChanger from './components/config-changer.svelte';
-	import DrawSettingsChanger from './components/draw-settings-changer.svelte';
-	import InfoBox from '../ui/info-box.svelte';
-	import FocusControl from './components/focus-control.svelte';
+	import RawDataInputer from './tooling/components/raw-data-inputer.svelte';
+	import ConfigChanger from './tooling/components/config-changer.svelte';
+	import DrawSettingsChanger from './tooling/components/draw-settings-changer.svelte';
+	import InfoBox from './tooling/ui/info-box.svelte';
+	import FocusControl from './tooling/components/focus-control.svelte';
 	import * as d3 from 'd3';
 
 	let redrawFunction = (_: DrawSettingsInterface) => {};

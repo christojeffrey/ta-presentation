@@ -1,7 +1,7 @@
 <script lang="ts">
-	import Heading from '../../ui/heading.svelte';
-	import type { ConfigInterface, GraphData } from '../../types';
-	import Button from '../../ui/button.svelte';
+	import Heading from '../ui/heading.svelte';
+	import type { ConfigInterface, GraphData } from '../types';
+	import Button from '../ui/button.svelte';
 	export let config: ConfigInterface;
 	export let doRefilter: boolean;
 	export let graphData: GraphData;
