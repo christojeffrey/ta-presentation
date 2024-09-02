@@ -23,7 +23,7 @@
 	import FocusControl from '../../tooling/components/focus-control.svelte';
 	import * as d3 from 'd3';
 	import Button from '../../tooling/ui/button.svelte';
-	import FilterEdge from '../../tooling/components/filter-edge.svelte';
+	import { simpleDataEdgeCombine } from '../../tooling/example-raw-data/simple-data-edge-combine';
 
 	let redrawFunction = (_: DrawSettingsInterface) => {};
 	let rawData: RawInputType;
@@ -108,18 +108,17 @@
 	}
 	function doRecenter() {
 		// recenter view, reset tranform
-		const canvasElement = document.getElementById('canvas-m02-filter')!;
+		const canvasElement = document.getElementById('canvas')!;
 		const canvas = d3.select(canvasElement);
 		canvas.attr('transform', `translate(0,0) scale(1)`);
 		drawSettings.transformation = d3.zoomIdentity;
 	}
 	$: {
 		if (isMounted) {
-			console.log(drawSettings.shownEdgesType);
 			// handle config changes
 			if (doReconvert) {
 				// will setup graphData. Will also setup shownEdgesType
-				convertedData = converter(rawData);
+				convertedData = converter(rawData, simpleDataEdgeCombine);
 				graphData = createGraphData(convertedData);
 
 				// Initialize shownEdgesType
@@ -146,8 +145,8 @@
 					handleNodeCollapseClick,
 					handleDependencyLiftClick,
 					handleOnNodeClick,
-					'canvas-m02-filter',
-					'nodeCanvas-m02-filter'
+					'canvas-edge-combine',
+					'nodeCanvas-edge-combine'
 				);
 				doRedraw = true;
 				doRelayout = false;
@@ -181,44 +180,32 @@
 <div class="flex h-full justify-between">
 	<!-- canvas -->
 	<div class="relative w-full">
-		<div class="left-0 top-0 flex gap-4">
-			<!-- recenter -->
-			<!-- <button on:click={doRecenter}>Recenter</button> -->
-			<button
-				on:click={() => {
-					// reset filter
-					config.filteredNodes = new Set();
-					doRefilter = true;
-				}}>Reset Filter</button
-			>
-		</div>
-		<!-- in focus box -->
-		{#if config.nodeInFocus}
-			<div class="absolute bottom-0 left-0 rounded-xl border-2 border-black bg-white p-4">
-				<div>
-					<div>
-						<h1 class="pb-4 text-center">{config.nodeInFocus.id}</h1>
-					</div>
-					<div>
-						<!-- only focus on it. do this by filtering everything else beside this -->
-						<Button
-							onClick={() => {
-								if (config.nodeInFocus !== null) {
-									config.filteredNodes = new Set([config.nodeInFocus.id]);
-								}
-								doRefilter = true;
-							}}>Focus</Button
-						>
-					</div>
-				</div>
-			</div>
-		{/if}
-
 		<svg bind:this={svgElement} class="h-full w-full" />
-	</div>
+		<Button
+			onClick={() => {
+				console.log(config.dependencyLifting.find((nodeConfig) => nodeConfig.node.id === 'appl'));
+				// if any of dependencyLifting node contain appl, remove it
+				if (config.dependencyLifting.find((nodeConfig) => nodeConfig.node.id === 'appl')) {
+					config.dependencyLifting = config.dependencyLifting.filter(
+						(nodeConfig) => nodeConfig.node.id !== 'appl'
+					);
+					isApplLifted = false;
+				} else {
+					// add appl
+					const applNode = graphData.flattenNodes.find((node) => node.id === 'appl');
+					if (applNode) {
+						config.dependencyLifting.push({
+							node: applNode,
+							sensitivity: config.dependencyTolerance
+						});
+					}
+					isApplLifted = true;
+				}
 
-	<!-- sidepanel -->
-	<div class="flex flex-col text-left">
-		<FilterEdge bind:drawSettings bind:doRedraw bind:doRelayout />
+				doRefilter = true;
+			}}
+		>
+			{isApplLifted ? 'unlift appl' : 'lift appl'}
+		</Button>
 	</div>
 </div>

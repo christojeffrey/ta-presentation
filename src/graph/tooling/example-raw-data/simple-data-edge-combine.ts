@@ -1,4 +1,4 @@
-export const simpleData = {
+export const simpleDataEdgeCombine = {
 	elements: {
 		nodes: [
 			{
@@ -12,18 +12,7 @@ export const simpleData = {
 					labels: ['Structure']
 				}
 			},
-			{
-				data: {
-					id: 'a',
-					properties: {
-						simpleName: 'a',
-						kind: 'class',
-						description: 'class a',
-						rs: 'Service Provider'
-					},
-					labels: ['Structure']
-				}
-			},
+
 			{
 				data: {
 					id: 'b',
@@ -35,26 +24,7 @@ export const simpleData = {
 					labels: ['Structure']
 				}
 			},
-			{
-				data: {
-					id: 'c',
-					properties: {
-						simpleName: 'c',
-						kind: 'class'
-					},
-					labels: ['Structure']
-				}
-			},
-			{
-				data: {
-					id: 'd',
-					properties: {
-						simpleName: 'd',
-						kind: 'class'
-					},
-					labels: ['Structure']
-				}
-			},
+
 			{
 				data: {
 					id: 'appl',
@@ -127,31 +97,9 @@ export const simpleData = {
 					},
 					labels: ['Structure']
 				}
-			},
-			{
-				data: {
-					id: 'lib',
-					properties: {
-						simpleName: 'lib',
-						kind: 'packages',
-						rs: 'Service Provider'
-					},
-					labels: ['Container']
-				}
 			}
 		],
 		edges: [
-			{
-				data: {
-					id: 'one',
-					source: 'main',
-					label: 'calls',
-					target: 'a',
-					properties: {
-						weight: 100
-					}
-				}
-			},
 			{
 				data: {
 					id: 'two',
@@ -174,17 +122,7 @@ export const simpleData = {
 					}
 				}
 			},
-			{
-				data: {
-					id: 'eight',
-					source: 'appl',
-					label: 'contains',
-					target: 'a',
-					properties: {
-						weight: 1
-					}
-				}
-			},
+
 			{
 				data: {
 					id: 'nine',
@@ -196,28 +134,7 @@ export const simpleData = {
 					}
 				}
 			},
-			{
-				data: {
-					id: 'ten',
-					source: 'lib',
-					label: 'contains',
-					target: 'c',
-					properties: {
-						weight: 1
-					}
-				}
-			},
-			{
-				data: {
-					id: 'eleven',
-					source: 'lib',
-					label: 'contains',
-					target: 'd',
-					properties: {
-						weight: 1
-					}
-				}
-			},
+
 			{
 				data: {
 					id: 'twelve',
@@ -240,17 +157,7 @@ export const simpleData = {
 					}
 				}
 			},
-			{
-				data: {
-					id: 'fourteen',
-					source: 'subMain-1',
-					label: 'accesses',
-					target: 'lib',
-					properties: {
-						weight: 200
-					}
-				}
-			},
+
 			{
 				data: {
 					id: 'fifteen',

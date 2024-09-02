@@ -200,7 +200,7 @@
 	<div class="m-6 flex flex-col">
 		<RawDataInputer bind:rawData bind:doReconvert />
 		<div class="h-[1px] bg-neutral-300" />
-		<ConfigChanger bind:config bind:doRefilter bind:graphData />
+		<!-- <ConfigChanger bind:config bind:doRefilter bind:graphData /> -->
 		<div class="h-[1px] bg-neutral-300" />
 		<DrawSettingsChanger bind:drawSettings bind:doRedraw bind:doRelayout />
 	</div>

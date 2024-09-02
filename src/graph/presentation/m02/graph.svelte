@@ -219,7 +219,7 @@
 				doRefilter = true;
 			}}
 		>
-			{isApplLifted ? 'Remove appl' : 'Add appl'}
+			{isApplLifted ? 'unlift appl' : 'lift appl'}
 		</Button>
 	</div>
 </div>

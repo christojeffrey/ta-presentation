@@ -6,6 +6,7 @@
 	import SecondImage from './second.png';
 	import ThirdImage from './third.png';
 	import GraphFilter from './graph-filter.svelte';
+	import GraphEdgeCombine from './graph-edge-combine.svelte';
 </script>
 
 <Slide>
@@ -86,6 +87,33 @@
 	<div class="flex h-[50vh] w-full">
 		<div class="flex-1">
 			<GraphFilter />
+		</div>
+	</div>
+</Slide>
+
+<!-- edge combine -->
+<Slide>
+	<h1 class="text-5xl font-bold">Edge Combine dan Tatanan Graf</h1>
+</Slide>
+
+<Slide>
+	<h1 class="mb-12 text-xl font-bold">Edge Combine dan Tatanan Graf</h1>
+	<div class="flex">
+		<h2 class="y-full my-auto text-left">
+			<div class="mb-8">
+				<div class="text-2xl">
+					penggabungan sisi dapat mengurangi kekusutan visual (H. Zhou dkk., 2013)
+				</div>
+			</div>
+		</h2>
+	</div>
+</Slide>
+
+<Slide>
+	<h1 class="mb-12 text-xl font-bold">Edge Combine dan Tatanan Graf</h1>
+	<div class="flex h-[50vh] w-full">
+		<div class="flex-1">
+			<GraphEdgeCombine />
 		</div>
 	</div>
 </Slide>
