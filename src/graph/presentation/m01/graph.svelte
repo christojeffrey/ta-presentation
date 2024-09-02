@@ -22,6 +22,7 @@
 	import InfoBox from '../../tooling/ui/info-box.svelte';
 	import FocusControl from '../../tooling/components/focus-control.svelte';
 	import * as d3 from 'd3';
+	import Button from '../../tooling/ui/button.svelte';
 
 	let redrawFunction = (_: DrawSettingsInterface) => {};
 	let rawData: RawInputType;
@@ -171,9 +172,24 @@
 	});
 </script>
 
-<div class="flex justify-between h-full">
+<div class="flex h-full justify-between">
 	<!-- canvas -->
 	<div class="relative w-full">
-		<svg bind:this={svgElement} class="w-full h-full" />
+		<svg bind:this={svgElement} class="h-full w-full" />
+		<!-- <Button
+			onClick={() => {
+				// if not empty, reset
+				if (config.collapsedNodes.length > 0) {
+					config.collapsedNodes = [];
+					// doRefilter = true;
+				} else {
+					config.collapsedNodes = graphData.flattenNodes;
+				}
+
+				doRefilter = true;
+			}}
+		>
+			Collapse All
+		</Button> -->
 	</div>
 </div>

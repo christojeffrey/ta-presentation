@@ -18,11 +18,12 @@
 			autoAnimateEasing: 'ease',
 			autoAnimateDuration: 1,
 			hash: true,
+			slideNumber: true,
 
 			// controls: false,
 			// progress: false
 
-			disableLayout: true, // handle layout manually
+			// disableLayout: true, // handle layout manually
 			margin: 0
 		});
 
@@ -31,7 +32,7 @@
 </script>
 
 <div class="reveal">
-	<div class="slides text-3xl">
+	<div class="slides">
 		<Presentation />
 	</div>
 </div>
