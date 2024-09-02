@@ -62,6 +62,8 @@
 
 	let isMounted = false;
 
+	let isApplLifted = false;
+
 	function handleOnNodeClick(clickedNode: GraphDataNode) {
 		debuggingConsole('clicked');
 		console.log(clickedNode);
@@ -178,7 +180,7 @@
 	<!-- canvas -->
 	<div class="relative w-full">
 		<svg bind:this={svgElement} class="h-full w-full" />
-		<!-- <Button
+		<Button
 			onClick={() => {
 				// if not empty, reset
 				if (config.collapsedNodes.length > 0) {
@@ -191,7 +193,33 @@
 				doRefilter = true;
 			}}
 		>
-			Collapse All
-		</Button> -->
+			{config.collapsedNodes.length > 0 ? 'Expand All' : 'Collapse All'}
+		</Button>
+		<Button
+			onClick={() => {
+				console.log(config.dependencyLifting.find((nodeConfig) => nodeConfig.node.id === 'appl'));
+				// if any of dependencyLifting node contain appl, remove it
+				if (config.dependencyLifting.find((nodeConfig) => nodeConfig.node.id === 'appl')) {
+					config.dependencyLifting = config.dependencyLifting.filter(
+						(nodeConfig) => nodeConfig.node.id !== 'appl'
+					);
+					isApplLifted = false;
+				} else {
+					// add appl
+					const applNode = graphData.flattenNodes.find((node) => node.id === 'appl');
+					if (applNode) {
+						config.dependencyLifting.push({
+							node: applNode,
+							sensitivity: config.dependencyTolerance
+						});
+					}
+					isApplLifted = true;
+				}
+
+				doRefilter = true;
+			}}
+		>
+			{isApplLifted ? 'Remove appl' : 'Add appl'}
+		</Button>
 	</div>
 </div>
