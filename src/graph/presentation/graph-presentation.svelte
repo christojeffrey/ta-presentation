@@ -4,9 +4,7 @@
 	import M01 from './m01/slide.svelte';
 	import M02 from './m02/slide.svelte';
 	import M03 from './m03/slide.svelte';
-	import D3Image from './d3.png';
-	import SvelteImage from './svelte.png';
-	import FrontendImage from './frontend.png';
+	import Implementasi from './implementasi/slide.svelte';
 </script>
 
 <!-- title -->
@@ -67,26 +65,4 @@
 <Slide>
 	<div class="text-4xl">Implementasi</div>
 </Slide>
-<Slide>
-	<div class="text-4xl">
-		<div class="font-bold">Platform dan Pustaka</div>
-		<div>untuk mengimplementasikan alat visualisasi</div>
-	</div>
-	<div class="fragment">
-		<div class=" text-3xl">Web app, svelte, D3</div>
-
-		<div class="flex justify-center">
-			<div class="w-1/4">
-				<img src={D3Image} alt="d3-icon" class="h-full w-full object-contain" />
-			</div>
-			<div class="w-1/4">
-				<img src={SvelteImage} alt="svelte-icon" class="h-full w-full object-contain" />
-			</div>
-		</div>
-	</div>
-</Slide>
-
-<!-- tampilan frontend -->
-<Slide>
-	<img src={FrontendImage} alt="frontend" class="h-full w-full object-contain" />
-</Slide>
+<Implementasi />
