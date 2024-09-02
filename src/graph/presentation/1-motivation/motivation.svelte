@@ -6,7 +6,7 @@
 	<h1 class="mx-auto text-4xl font-bold">Motivasi</h1>
 </Slide>
 <Slide>
-	<h1 class="mx-auto mb-4 text-xl font-bold text-slate-300">Motivasi</h1>
+	<h1 class="mx-auto mb-4 text-xl font-bold">Motivasi</h1>
 	<div class="fragment mb-4 text-4xl">
 		Terdapat <span class="font-bold"> kesulitan untuk melakukan abstraksi </span>
 		visualisasi arsitektur perangkat lunak dalam bentuk graf
@@ -42,4 +42,3 @@
 		<span class="">dan (2) mengimplementasi fitur-fitur yang interaktif dan customizable.</span>
 	</h1>
 </Slide>
-

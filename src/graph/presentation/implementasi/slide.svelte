@@ -37,7 +37,7 @@
 </Slide>
 
 <Slide>
-	<div class="text-3xl">Arsitektur</div>
+	<div class="text-4xl font-bold">Arsitektur</div>
 	<img src={ArsitekturImage} alt="arsitektur" class="h-full w-full object-contain" />
 </Slide>
 

@@ -64,7 +64,7 @@
 <M03 />
 <!-- Implementasi -->
 <Slide>
-	<div class="text-4xl">Implementasi</div>
+	<div class="text-4xl font-bold">Implementasi</div>
 </Slide>
 <Implementasi />
 
