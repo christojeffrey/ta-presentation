@@ -27,7 +27,7 @@
 			PENGEMBANGAN ALAT VISUALISASI ARSITEKTUR PERANGKAT LUNAK
 		</div>
 		<div class="mb-36 text-3xl font-bold">Graph dan BubbleTea</div>
-		<div class="flex w-full text-left justify-around">
+		<div class="flex w-full justify-around text-left">
 			<div class="mb-24 text-2xl">
 				Penulis:
 				<div>13520049 Aditya Prawira Nugroho</div>
@@ -114,4 +114,4 @@
 	</Slide>
 </Slide>
 <GraphPresentation />
-<BubbleteaPresentation />
+<!-- <BubbleteaPresentation /> -->

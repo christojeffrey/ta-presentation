@@ -5,6 +5,7 @@
 	import M02 from './m02/slide.svelte';
 	import M03 from './m03/slide.svelte';
 	import Implementasi from './implementasi/slide.svelte';
+	import Keseluruhan from './keseluruhan/slide.svelte';
 </script>
 
 <!-- title -->
@@ -66,3 +67,6 @@
 	<div class="text-4xl">Implementasi</div>
 </Slide>
 <Implementasi />
+
+<!-- keseluruhan -->
+<Keseluruhan />
