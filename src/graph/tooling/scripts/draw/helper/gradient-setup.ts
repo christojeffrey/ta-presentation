@@ -1,4 +1,4 @@
-import {EdgeType} from '../../../types';
+import { EdgeType } from '../../../types';
 
 const LINK_COLOR_POOL = [
 	['#e5f5f9', '#2ca25f'],
@@ -7,10 +7,13 @@ const LINK_COLOR_POOL = [
 	['#e0f3db', '#43a2ca'],
 	['#e7e1ef', '#dd1c77'],
 	['#ffffe5', '#662506'],
-	['#ffffe5', '#004529'],
+	['#ffffe5', '#004529']
 ];
 
-export function setupGradient(svg: d3.Selection<SVGGElement, unknown, null, undefined>) {
+export function setupGradient(
+	svg: d3.Selection<SVGGElement, unknown, null, undefined>,
+	canvasId: string
+) {
 	// Use defs to store gradient definitions
 	const defs = svg.append('defs');
 	const poolLength = LINK_COLOR_POOL.length;
@@ -22,11 +25,11 @@ export function setupGradient(svg: d3.Selection<SVGGElement, unknown, null, unde
 			const x2 = i < 2 ? (i + 1) % 2 : 0;
 			const y2 = i < 2 ? 0 : i % 2;
 
-			const idSuffix = `${i < 2 ? '' : 'Vertical'}${i % 2 == 0 ? '' : 'Reversed'}`
+			const idSuffix = `${i < 2 ? '' : 'Vertical'}${i % 2 == 0 ? '' : 'Reversed'}`;
 
 			const gradient = defs
 				.append('linearGradient')
-				.attr('id', `${edgeType}Gradient${idSuffix}`)
+				.attr('id', `${edgeType}Gradient${idSuffix}${canvasId}`)
 				.attr('x1', x1)
 				.attr('y1', y1)
 				.attr('x2', x2)

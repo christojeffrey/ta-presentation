@@ -15,7 +15,9 @@ export function addDragAndDrop(
 	nodesDictionary: SimpleNodesDictionaryType,
 	svgElement: Element,
 	linkCanvas: d3.Selection<SVGGElement, unknown, null, undefined>,
-	drawSettings: DrawSettingsInterface
+	drawSettings: DrawSettingsInterface,
+	nodeCanvasId: string,
+	canvasId: string
 ) {
 	if (nodes.length === 0) return;
 
@@ -75,14 +77,22 @@ export function addDragAndDrop(
 				}
 
 				// Rerender nodes
-				updateNodePosition(node, svgElement);
+				updateNodePosition(node, svgElement, nodeCanvasId);
 
-				renderLinks(links, nodesDictionary, linkCanvas, drawSettings);
+				renderLinks(links, nodesDictionary, linkCanvas, drawSettings, canvasId);
 			})
 	);
 
 	nodes.forEach((node) => {
-		const element = document.getElementById(`group-${toHTMLToken(node.id)}`)!;
-		addDragAndDrop(links, node.members, nodesDictionary, element, linkCanvas, drawSettings);
+		const element = document.getElementById(`${nodeCanvasId}-group-${toHTMLToken(node.id)}`)!;
+		addDragAndDrop(
+			links,
+			node.members,
+			nodesDictionary,
+			element,
+			linkCanvas,
+			drawSettings,
+			nodeCanvasId
+		);
 	});
 }

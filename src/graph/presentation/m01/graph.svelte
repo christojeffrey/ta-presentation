@@ -141,7 +141,9 @@
 					drawSettings,
 					handleNodeCollapseClick,
 					handleDependencyLiftClick,
-					handleOnNodeClick
+					handleOnNodeClick,
+					'canvas-m01',
+					'nodeCanvas-m01'
 				);
 				doRedraw = true;
 				doRelayout = false;

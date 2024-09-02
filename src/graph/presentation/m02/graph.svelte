@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 
-	import { debuggingConsole, extractAvailableEdgeType } from './presentation/m01/tooling/helper';
+	import { debuggingConsole, extractAvailableEdgeType } from '../../tooling/helper';
 	import type {
 		ConfigInterface,
 		ConvertedData,
@@ -10,18 +10,19 @@
 		GraphDataNode,
 		GraphData,
 		RawInputType
-	} from './presentation/m01/tooling/types';
+	} from '../../tooling/types';
 
 	// scripts
-	import { cleanCanvas, draw, filter, converter, createGraphData } from './presentation/m01/tooling/scripts';
+	import { cleanCanvas, draw, filter, converter, createGraphData } from '../../tooling/scripts';
 
 	// components
-	import RawDataInputer from './presentation/m01/tooling/components/raw-data-inputer.svelte';
-	import ConfigChanger from './presentation/m01/tooling/components/config-changer.svelte';
-	import DrawSettingsChanger from './presentation/m01/tooling/components/draw-settings-changer.svelte';
-	import InfoBox from './presentation/m01/tooling/ui/info-box.svelte';
-	import FocusControl from './presentation/m01/tooling/components/focus-control.svelte';
+	import RawDataInputer from '../../tooling/components/raw-data-inputer.svelte';
+	import ConfigChanger from '../../tooling/components/config-changer.svelte';
+	import DrawSettingsChanger from '../../tooling/components/draw-settings-changer.svelte';
+	import InfoBox from '../../tooling/ui/info-box.svelte';
+	import FocusControl from '../../tooling/components/focus-control.svelte';
 	import * as d3 from 'd3';
+	import Button from '../../tooling/ui/button.svelte';
 
 	let redrawFunction = (_: DrawSettingsInterface) => {};
 	let rawData: RawInputType;
@@ -140,7 +141,9 @@
 					drawSettings,
 					handleNodeCollapseClick,
 					handleDependencyLiftClick,
-					handleOnNodeClick
+					handleOnNodeClick,
+					'canvas-m02',
+					'nodeCanvas-m02'
 				);
 				doRedraw = true;
 				doRelayout = false;
@@ -171,37 +174,24 @@
 	});
 </script>
 
-<div class="flex justify-between h-full">
+<div class="flex h-full justify-between">
 	<!-- canvas -->
-	<div class="relative m-6 w-full">
-		<div class="absolute right-0 bottom-0">
-			<InfoBox />
-		</div>
-		<div class="top-0 left-0">
-			<!-- recenter -->
-			<button on:click={doRecenter}>Recenter</button>
-		</div>
-		<!-- in focus box -->
-		<div class="absolute left-0 bottom-0 border-2 border-black rounded-xl p-4 bg-white">
-			<FocusControl
-				bind:config
-				{handleNodeCollapseClick}
-				{handleDependencyLiftClick}
-				bind:doRefilter
-			/>
-		</div>
-		<svg bind:this={svgElement} class="w-full h-full" />
-	</div>
+	<div class="relative w-full">
+		<svg bind:this={svgElement} class="h-full w-full" />
+		<!-- <Button
+			onClick={() => {
+				// if not empty, reset
+				if (config.collapsedNodes.length > 0) {
+					config.collapsedNodes = [];
+					// doRefilter = true;
+				} else {
+					config.collapsedNodes = graphData.flattenNodes;
+				}
 
-	<!-- vertical line -->
-	<div class="bg-neutral-300 w-[2px]" />
-
-	<!-- sidepanel -->
-	<div class="flex flex-col m-6">
-		<RawDataInputer bind:rawData bind:doReconvert />
-		<div class="bg-neutral-300 h-[1px]" />
-		<ConfigChanger bind:config bind:doRefilter bind:graphData />
-		<div class="bg-neutral-300 h-[1px]" />
-		<DrawSettingsChanger bind:drawSettings bind:doRedraw bind:doRelayout />
+				doRefilter = true;
+			}}
+		>
+			Collapse All
+		</Button> -->
 	</div>
 </div>

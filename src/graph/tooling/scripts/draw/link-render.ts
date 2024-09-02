@@ -1,9 +1,9 @@
-import {distance, geometricMean, notNaN, toHTMLToken} from '../../helper';
+import { distance, geometricMean, notNaN, toHTMLToken } from '../../helper';
 import type {
 	DrawSettingsInterface,
 	GraphDataEdge,
 	GraphDataNode,
-	SimpleNodesDictionaryType,
+	SimpleNodesDictionaryType
 } from '../../types';
 import { NormalizeWeight } from './helper/normalize-weight';
 
@@ -17,17 +17,18 @@ export function renderLinks(
 	nodesDictionary: SimpleNodesDictionaryType,
 	linkCanvas: d3.Selection<SVGGElement, unknown, null, undefined>,
 	drawSettings: DrawSettingsInterface,
+	canvasId: string
 ) {
 	/** Returns the absolute x and y coordinates of a GraphDataNode */
-	function getAbsCoordinates(node?: GraphDataNode): {x: number; y: number} {
+	function getAbsCoordinates(node?: GraphDataNode): { x: number; y: number } {
 		if (node) {
-			const {x, y} = getAbsCoordinates(node.parent);
+			const { x, y } = getAbsCoordinates(node.parent);
 			return {
 				x: notNaN(node.x! + x),
-				y: notNaN(node.y! + y),
+				y: notNaN(node.y! + y)
 			};
 		} else {
-			return {x: 0, y: 0};
+			return { x: 0, y: 0 };
 		}
 	}
 
@@ -41,8 +42,8 @@ export function renderLinks(
 	}
 
 	function calculateIntersection(
-		source: {x: number; y: number; width: number; height: number},
-		target: {x: number; y: number; width: number; height: number},
+		source: { x: number; y: number; width: number; height: number },
+		target: { x: number; y: number; width: number; height: number }
 	) {
 		const dx = target.x - source.x;
 		const dy = target.y - source.y;
@@ -59,7 +60,7 @@ export function renderLinks(
 			y = dy > 0 ? source.height / 2 : -source.height / 2;
 			x = y / Math.tan(angle);
 		}
-		const intersectionSource = {x: source.x + x, y: source.y + y};
+		const intersectionSource = { x: source.x + x, y: source.y + y };
 
 		// Determine intersection with target rectangle
 		if (Math.abs(dx) * target.height > Math.abs(dy) * target.width) {
@@ -71,9 +72,9 @@ export function renderLinks(
 			y = dy > 0 ? -target.height / 2 : target.height / 2;
 			x = y / Math.tan(angle);
 		}
-		const intersectionTarget = {x: target.x + x, y: target.y + y};
+		const intersectionTarget = { x: target.x + x, y: target.y + y };
 
-		return {intersectionSource, intersectionTarget};
+		return { intersectionSource, intersectionTarget };
 	}
 	/** Returns path coordinates, and annotates the line-data with extra info */
 	function annotateLine(l: GraphDataEdge) {
@@ -83,22 +84,29 @@ export function renderLinks(
 		const targetAbsoluteCoordinate = getAbsCoordinates(target);
 
 		l.absoluteCoordinates = [sourceAbsoluteCoordinate, targetAbsoluteCoordinate];
-		l.isGradientVertical = isVertical(sourceAbsoluteCoordinate.x, targetAbsoluteCoordinate.x, sourceAbsoluteCoordinate.y, targetAbsoluteCoordinate.y);
-		l.gradientDirection = l.isGradientVertical ? sourceAbsoluteCoordinate.y < targetAbsoluteCoordinate.y : sourceAbsoluteCoordinate.x > targetAbsoluteCoordinate.x;
+		l.isGradientVertical = isVertical(
+			sourceAbsoluteCoordinate.x,
+			targetAbsoluteCoordinate.x,
+			sourceAbsoluteCoordinate.y,
+			targetAbsoluteCoordinate.y
+		);
+		l.gradientDirection = l.isGradientVertical
+			? sourceAbsoluteCoordinate.y < targetAbsoluteCoordinate.y
+			: sourceAbsoluteCoordinate.x > targetAbsoluteCoordinate.x;
 
-		const {intersectionSource: s, intersectionTarget: t} = calculateIntersection(
+		const { intersectionSource: s, intersectionTarget: t } = calculateIntersection(
 			{
 				x: sourceAbsoluteCoordinate.x,
 				y: sourceAbsoluteCoordinate.y,
 				width: source.width!,
-				height: source.height!,
+				height: source.height!
 			},
 			{
 				x: targetAbsoluteCoordinate.x,
 				y: targetAbsoluteCoordinate.y,
 				width: target.width!,
-				height: target.height!,
-			},
+				height: target.height!
+			}
 		);
 
 		l.labelCoordinates = [s, t];
@@ -106,14 +114,14 @@ export function renderLinks(
 		/** List of all coordinates the path will need to go through */
 		const coordinates = [
 			s,
-			...l.routing.map(point => {
-				const {x, y} = getAbsCoordinates(point.origin);
+			...l.routing.map((point) => {
+				const { x, y } = getAbsCoordinates(point.origin);
 				return {
 					x: x + point.x,
-					y: y + point.y,
+					y: y + point.y
 				};
 			}),
-			t,
+			t
 		];
 
 		let result = `M ${Math.abs(s.x - t.x) < 0.3 ? s.x + 0.5 : s.x} ${Math.abs(s.y - t.y) < 0.3 ? s.y + 0.5 : s.y} `;
@@ -143,16 +151,17 @@ export function renderLinks(
 	// Enter
 	linkCanvas
 		.selectAll('path')
-		.data(links, l => (l as GraphDataEdge).id)
+		.data(links, (l) => (l as GraphDataEdge).id)
 		.enter()
 		.append('path')
-		.attr('id', l => `line-${toHTMLToken(l.id)}`)
+		.attr('id', (l) => `${canvasId}-line-${toHTMLToken(l.id)}`)
 		.attr('d', annotateLine)
 		.attr(
 			'stroke',
-			l => `url(#${toHTMLToken(l.type)}Gradient${l.isGradientVertical ? 'Vertical' : ''}${l.gradientDirection ? 'Reversed' : ''})`,
+			(l) =>
+				`url(#${toHTMLToken(l.type)}Gradient${l.isGradientVertical ? 'Vertical' : ''}${l.gradientDirection ? 'Reversed' : ''}${canvasId})`
 		)
-		.attr('stroke-width', l => NormalizeWeight(l.weight))
+		.attr('stroke-width', (l) => NormalizeWeight(l.weight))
 		.attr('fill', 'transparent');
 
 	// Update
@@ -167,9 +176,10 @@ export function renderLinks(
 		.attr('d', annotateLine)
 		.attr(
 			'stroke',
-			l => `url(#${toHTMLToken(l.type)}Gradient${l.isGradientVertical ? 'Vertical' : ''}${l.gradientDirection ? 'Reversed' : ''})`,
+			(l) =>
+				`url(#${toHTMLToken(l.type)}Gradient${l.isGradientVertical ? 'Vertical' : ''}${l.gradientDirection ? 'Reversed' : ''}${canvasId})`
 		)
-		.attr('display', l => (drawSettings.shownEdgesType.get(l.type) ? 'inherit' : 'none'));
+		.attr('display', (l) => (drawSettings.shownEdgesType.get(l.type) ? 'inherit' : 'none'));
 
 	// No exit, since we don't get all edges when updating
 
@@ -177,7 +187,7 @@ export function renderLinks(
 	if (drawSettings.showEdgeLabels) {
 		linkCanvas
 			.selectAll('text')
-			.data(links, l => (l as GraphDataEdge).id)
+			.data(links, (l) => (l as GraphDataEdge).id)
 			.enter()
 			.append('text')
 			.attr('class', 'link-label')
@@ -185,17 +195,17 @@ export function renderLinks(
 			.attr('dominant-baseline', 'middle')
 			.attr('fill', 'black')
 			.attr('font-size', '10px')
-			.text(l => l.id);
+			.text((l) => l.id);
 
 		(linkCanvas.selectAll('text') as d3.Selection<d3.BaseType, GraphDataEdge, SVGGElement, unknown>)
-			.attr('x', l => (l.labelCoordinates![0].x + l.labelCoordinates![1].x) / 2)
-			.attr('y', l => (l.labelCoordinates![0].y + l.labelCoordinates![1].y) / 2);
+			.attr('x', (l) => (l.labelCoordinates![0].x + l.labelCoordinates![1].x) / 2)
+			.attr('y', (l) => (l.labelCoordinates![0].y + l.labelCoordinates![1].y) / 2);
 	} else if (!drawSettings.showEdgeLabels) {
 		linkCanvas.selectAll('text').remove();
 	}
 
 	// Cleanup, just to be sure:
-	links.forEach(l => {
+	links.forEach((l) => {
 		l.labelCoordinates = undefined;
 		l.gradientDirection = undefined;
 	});

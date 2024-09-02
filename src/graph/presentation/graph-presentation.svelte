@@ -1,7 +1,8 @@
 <script>
 	import Slide from '$lib/deck/slide.svelte';
 	import Motivation from './1-motivation/motivation.svelte';
-	import NestedNode from './m01/slide.svelte';
+	import M01 from './m01/slide.svelte';
+	import M02 from './m02/slide.svelte';
 	import D3Image from './d3.png';
 	import SvelteImage from './svelte.png';
 	import FrontendImage from './frontend.png';
@@ -36,7 +37,7 @@
 	</div>
 </Slide>
 <!-- nested node -->
-<NestedNode />
+<M01 />
 
 <!-- M-02 -->
 <Slide>
@@ -48,6 +49,7 @@
 		simpul dan sisi dengan pengurangan informasi yang minimal
 	</div>
 </Slide>
+<M02 />
 <!-- M-03 -->
 <Slide>
 	<div class="text-lg font-bold">M-03</div>
