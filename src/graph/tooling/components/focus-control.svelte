@@ -10,7 +10,7 @@
 <div>
 	{#if config.nodeInFocus}
 		<div>
-			<h1 class="text-2xl pb-4 text-center">{config.nodeInFocus.id}</h1>
+			<h1 class="pb-4 text-center">{config.nodeInFocus.id}</h1>
 		</div>
 		<div>
 			<!-- collapse -->

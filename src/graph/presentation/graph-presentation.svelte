@@ -3,6 +3,7 @@
 	import Motivation from './1-motivation/motivation.svelte';
 	import M01 from './m01/slide.svelte';
 	import M02 from './m02/slide.svelte';
+	import M03 from './m03/slide.svelte';
 	import D3Image from './d3.png';
 	import SvelteImage from './svelte.png';
 	import FrontendImage from './frontend.png';
@@ -60,6 +61,8 @@
 		pada simpul dan sisi
 	</div>
 </Slide>
+
+<M03 />
 <!-- Implementasi -->
 <Slide>
 	<div class="text-4xl">Implementasi</div>
