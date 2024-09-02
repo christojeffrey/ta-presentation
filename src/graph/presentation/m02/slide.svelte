@@ -5,6 +5,7 @@
 	import FirstImage from './first.png';
 	import SecondImage from './second.png';
 	import ThirdImage from './third.png';
+	import GraphFilter from './graph-filter.svelte';
 </script>
 
 <Slide>
@@ -61,23 +62,30 @@
 		</div>
 	</div>
 </Slide>
-<!-- 
+
+<!-- node filter edge filter -->
 <Slide>
-	<h1 class="text-5xl font-bold">Arah Sisi Berwarna</h1>
+	<h1 class="text-5xl font-bold">Node Filter dan Edge Filter</h1>
 </Slide>
+
 <Slide>
-	<h1 class="mb-12 text-xl font-bold">Arah Sisi Berwarna</h1>
+	<h1 class="mb-12 text-xl font-bold">Node Filter dan Edge Filter</h1>
 	<div class="flex">
-		<h2 class="y-full my-auto w-1/2 text-left">
+		<h2 class="y-full my-auto text-left">
 			<div class="mb-8">
-				<div class="mt-4 text-xl">
-					menggunakan panah, menggunakan intensitas, penggunaan warna, dan lekukan sisi
+				<div class="text-2xl">
+					Miller (Miller, t.t.) mengemukakan bahwa terdapat keterbatasan dan limitasi terhadap
+					jumlah informasi yang dapat diterima, dan diproses pada manusia.
 				</div>
 			</div>
-			<div class="text-md">Holten dan van Wijk (2009)</div>
 		</h2>
-		<div>
-			<img src={ArahImage} alt="graph" class="mx-auto w-3/4 object-contain" />
+	</div>
+</Slide>
+<Slide>
+	<h1 class="mb-12 text-xl font-bold">Node Filter dan Edge Filter</h1>
+	<div class="flex h-[50vh] w-full">
+		<div class="flex-1">
+			<GraphFilter />
 		</div>
 	</div>
-</Slide> -->
+</Slide>

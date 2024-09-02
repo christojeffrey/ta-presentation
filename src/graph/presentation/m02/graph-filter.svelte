@@ -22,6 +22,7 @@
 	import InfoBox from './tooling/ui/info-box.svelte';
 	import FocusControl from './tooling/components/focus-control.svelte';
 	import * as d3 from 'd3';
+	import Button from './tooling/ui/button.svelte';
 
 	let redrawFunction = (_: DrawSettingsInterface) => {};
 	let rawData: RawInputType;
@@ -60,6 +61,8 @@
 	let doRelayout = true;
 
 	let isMounted = false;
+
+	let isApplLifted = false;
 
 	function handleOnNodeClick(clickedNode: GraphDataNode) {
 		debuggingConsole('clicked');
@@ -140,7 +143,9 @@
 					drawSettings,
 					handleNodeCollapseClick,
 					handleDependencyLiftClick,
-					handleOnNodeClick
+					handleOnNodeClick,
+					'canvas-m02',
+					'nodeCanvas-m02'
 				);
 				doRedraw = true;
 				doRelayout = false;
@@ -173,35 +178,7 @@
 
 <div class="flex h-full justify-between">
 	<!-- canvas -->
-	<div class="relative m-6 w-full">
-		<div class="absolute bottom-0 right-0">
-			<InfoBox />
-		</div>
-		<div class="left-0 top-0">
-			<!-- recenter -->
-			<button on:click={doRecenter}>Recenter</button>
-		</div>
-		<!-- in focus box -->
-		<div class="absolute bottom-0 left-0 rounded-xl border-2 border-black bg-white p-4">
-			<FocusControl
-				bind:config
-				{handleNodeCollapseClick}
-				{handleDependencyLiftClick}
-				bind:doRefilter
-			/>
-		</div>
+	<div class="relative w-full">
 		<svg bind:this={svgElement} class="h-full w-full" />
-	</div>
-
-	<!-- vertical line -->
-	<div class="w-[2px] bg-neutral-300" />
-
-	<!-- sidepanel -->
-	<div class="m-6 flex flex-col">
-		<RawDataInputer bind:rawData bind:doReconvert />
-		<div class="h-[1px] bg-neutral-300" />
-		<ConfigChanger bind:config bind:doRefilter bind:graphData />
-		<div class="h-[1px] bg-neutral-300" />
-		<DrawSettingsChanger bind:drawSettings bind:doRedraw bind:doRelayout />
 	</div>
 </div>
