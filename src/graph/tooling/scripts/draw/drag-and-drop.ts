@@ -92,7 +92,8 @@ export function addDragAndDrop(
 			element,
 			linkCanvas,
 			drawSettings,
-			nodeCanvasId
+			nodeCanvasId,
+			canvasId
 		);
 	});
 }
